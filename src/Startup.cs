@@ -39,8 +39,8 @@ namespace NST.Simple.Api
             AddSwaggerGen(services);
 
             services.AddHttpContextAccessor();
-
             services.AddCors();
+            services.AddSingleton<SuperService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
