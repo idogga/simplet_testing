@@ -41,6 +41,7 @@ namespace NST.Simple.Api
             services.AddHttpContextAccessor();
             services.AddCors();
             services.AddSingleton<SuperService>();
+            services.AddHostedService<BackJob>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
