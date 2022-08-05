@@ -5,11 +5,11 @@ using NUnit.Framework;
 namespace IntegrationTest.Controllers.NotificationsController
 {
     [TestFixture]
-    public class GetSavedMethod
+    public class ChangeMethod
     {
         private readonly HttpClient _httpClient;
 
-        public GetSavedMethod()
+        public ChangeMethod()
         {
             var appFactory = new WebApplicationFactory<Startup>();
             _httpClient = appFactory.CreateClient();
@@ -19,14 +19,16 @@ namespace IntegrationTest.Controllers.NotificationsController
         public async Task GetSaved_NoParametrs_Sesccess()
         {
             //Arrange
-            var request = new HttpRequestMessage(HttpMethod.Get, $"/api/Simple/saved");
+            var requestPut = new HttpRequestMessage(HttpMethod.Put, $"/api/Simple/saved");
+            var requestGet = new HttpRequestMessage(HttpMethod.Get, $"/api/Simple/saved");
 
             //Act
-            var response = await _httpClient.SendAsync(request);
+            var responsePut = await _httpClient.SendAsync(requestPut);
+            var responseGet = await _httpClient.SendAsync(requestGet);
 
             //Assert
-            response.EnsureSuccessStatusCode();
-            Assert.That(response.Content.ReadAsStringAsync().Result, Is.EqualTo("2"));
+            responsePut.EnsureSuccessStatusCode();
+            Assert.That(responseGet.Content.ReadAsStringAsync().Result, Is.EqualTo("4"));
         }
     }
 }

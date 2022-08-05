@@ -17,7 +17,7 @@ namespace IntegrationTest.Controllers.NotificationsController
         }
 
         [Test]
-        public async Task DoMath_WithCorrectValues_ShouldSesccess()
+        public async Task DoMath_WithCorrectValues_Sesccess()
         {
             //Arrange
             int a = 100;
@@ -28,12 +28,12 @@ namespace IntegrationTest.Controllers.NotificationsController
             var response = await _httpClient.SendAsync(request);
 
             //Assert
-            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+            response.EnsureSuccessStatusCode();
             Assert.That(response.Content.ReadAsStringAsync().Result, Is.EqualTo($"{a + b}"));
         }
 
         [Test]
-        public async Task DoMath_WithWrong_A_Value_ShouldException()
+        public async Task DoMath_WithWrong_A_Value_Exception()
         {
             //Arrange
             int a = 50;
@@ -49,7 +49,7 @@ namespace IntegrationTest.Controllers.NotificationsController
         }
 
         [Test]
-        public async Task DoMath_WithWrong_B_Value_ShouldException()
+        public async Task DoMath_WithWrong_B_Value_Exception()
         {
             //Arrange
             int a = 100;

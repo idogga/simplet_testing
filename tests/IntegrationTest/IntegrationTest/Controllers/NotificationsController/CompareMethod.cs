@@ -1,5 +1,4 @@
-﻿using System.Net;
-using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Mvc.Testing;
 using NST.Simple.Api;
 using NUnit.Framework;
 
@@ -17,7 +16,7 @@ namespace IntegrationTest.Controllers.NotificationsController
         }
 
         [Test]
-        public async Task Compare_WithMathingValues_ShouldSesccess()
+        public async Task Compare_WithMathingValues_Sesccess()
         {
             //Arrange
             int a = 5;
@@ -28,12 +27,12 @@ namespace IntegrationTest.Controllers.NotificationsController
             var response = await _httpClient.SendAsync(request);
 
             //Assert
-            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+            response.EnsureSuccessStatusCode();
             Assert.That(response.Content.ReadAsStringAsync().Result, Is.EqualTo("true"));
         }
 
         [Test]
-        public async Task Compare_WithMismatchedValues_ShouldSesccess()
+        public async Task Compare_WithMismatchedValues_Sesccess()
         {
             //Arrange
             int a = 0;
@@ -44,7 +43,7 @@ namespace IntegrationTest.Controllers.NotificationsController
             var response = await _httpClient.SendAsync(request);
 
             //Assert
-            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+            response.EnsureSuccessStatusCode();
             Assert.That(response.Content.ReadAsStringAsync().Result, Is.EqualTo("false"));
         }
     }
