@@ -1,22 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
-using NST.Simple.Api;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace IntegrationTest.Controllers.NotificationsController
 {
     [TestFixture]
-    public class CompareMethod
+    public class CompareMethodTest
     {
         private readonly HttpClient _httpClient;
 
-        public CompareMethod()
+        public CompareMethodTest()
         {
-            var appFactory = new WebApplicationFactory<Startup>();
-            _httpClient = appFactory.CreateClient();
+            _httpClient = Helper.GetHttpClient();
         }
 
         [Test]
-        public async Task Compare_WithMathingValues_Sesccess()
+        public async Task Compare_WithMathingValues_Seccess()
         {
             //Arrange
             int a = 5;
@@ -25,14 +22,15 @@ namespace IntegrationTest.Controllers.NotificationsController
 
             //Act
             var response = await _httpClient.SendAsync(request);
+            string result = response.Content.ReadAsStringAsync().Result;
 
             //Assert
             response.EnsureSuccessStatusCode();
-            Assert.That(response.Content.ReadAsStringAsync().Result, Is.EqualTo("true"));
+            Assert.That(result, Is.EqualTo("true"));
         }
 
         [Test]
-        public async Task Compare_WithMismatchedValues_Sesccess()
+        public async Task Compare_WithMismatchedValues_Seccess()
         {
             //Arrange
             int a = 0;
@@ -41,10 +39,11 @@ namespace IntegrationTest.Controllers.NotificationsController
 
             //Act
             var response = await _httpClient.SendAsync(request);
+            string result = response.Content.ReadAsStringAsync().Result;
 
             //Assert
             response.EnsureSuccessStatusCode();
-            Assert.That(response.Content.ReadAsStringAsync().Result, Is.EqualTo("false"));
+            Assert.That(result, Is.EqualTo("false"));
         }
     }
 }

@@ -1,23 +1,20 @@
 ﻿using System.Net;
-using Microsoft.AspNetCore.Mvc.Testing;
-using NST.Simple.Api;
 using NUnit.Framework;
 
 namespace IntegrationTest.Controllers.NotificationsController
 {
     [TestFixture]
-    public class DoMathMethod
+    public class DoMathMethodTest
     {
         private readonly HttpClient _httpClient;
 
-        public DoMathMethod()
+        public DoMathMethodTest()
         {
-            var appFactory = new WebApplicationFactory<Startup>();
-            _httpClient = appFactory.CreateClient();
+            _httpClient = Helper.GetHttpClient();
         }
 
         [Test]
-        public async Task DoMath_WithCorrectValues_Sesccess()
+        public async Task DoMath_WithCorrectValues_Seccess()
         {
             //Arrange
             int a = 100;
@@ -26,10 +23,11 @@ namespace IntegrationTest.Controllers.NotificationsController
 
             //Act
             var response = await _httpClient.SendAsync(request);
+            string result = response.Content.ReadAsStringAsync().Result;
 
             //Assert
             response.EnsureSuccessStatusCode();
-            Assert.That(response.Content.ReadAsStringAsync().Result, Is.EqualTo($"{a + b}"));
+            Assert.That(result, Is.EqualTo($"{a + b}"));
         }
 
         [Test]
@@ -42,10 +40,11 @@ namespace IntegrationTest.Controllers.NotificationsController
 
             //Act
             var response = await _httpClient.SendAsync(request);
+            string result = response.Content.ReadAsStringAsync().Result;
 
             //Assert
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
-            Assert.IsTrue(response.Content.ReadAsStringAsync().Result.Contains($"oups,  a value is {a}"));
+            Assert.IsTrue(result.Contains($"oups,  a value is {a}"));
         }
 
         [Test]
@@ -58,10 +57,11 @@ namespace IntegrationTest.Controllers.NotificationsController
 
             //Act
             var response = await _httpClient.SendAsync(request);
+            string result = response.Content.ReadAsStringAsync().Result;
 
             //Assert
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
-            Assert.IsTrue(response.Content.ReadAsStringAsync().Result.Contains($"oups, b value is too be {b}"));
+            Assert.IsTrue(result.Contains($"oups, b value is too be {b}"));
         }
     }
 }
