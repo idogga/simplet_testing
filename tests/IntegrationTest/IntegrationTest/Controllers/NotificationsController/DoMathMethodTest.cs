@@ -19,10 +19,9 @@ namespace IntegrationTest.Controllers.NotificationsController
             //Arrange
             int a = 100;
             int b = 70;
-            var request = new HttpRequestMessage(HttpMethod.Get, $"/api/Simple/{a}/plus/{b}");
 
             //Act
-            var response = await _httpClient.SendAsync(request);
+            var response = await _httpClient.GetAsync($"/api/Simple/{a}/plus/{b}");
             string result = response.Content.ReadAsStringAsync().Result;
 
             //Assert
@@ -36,10 +35,9 @@ namespace IntegrationTest.Controllers.NotificationsController
             //Arrange
             int a = 50;
             int b = 70;
-            var request = new HttpRequestMessage(HttpMethod.Get, $"/api/Simple/{a}/plus/{b}");
 
             //Act
-            var response = await _httpClient.SendAsync(request);
+            var response = await _httpClient.GetAsync($"/api/Simple/{a}/plus/{b}");
             string result = response.Content.ReadAsStringAsync().Result;
 
             //Assert
@@ -53,10 +51,9 @@ namespace IntegrationTest.Controllers.NotificationsController
             //Arrange
             int a = 100;
             int b = 50;
-            var request = new HttpRequestMessage(HttpMethod.Get, $"/api/Simple/{a}/plus/{b}");
 
             //Act
-            var response = await _httpClient.SendAsync(request);
+            var response = await _httpClient.GetAsync($"/api/Simple/{a}/plus/{b}");
             string result = response.Content.ReadAsStringAsync().Result;
 
             //Assert

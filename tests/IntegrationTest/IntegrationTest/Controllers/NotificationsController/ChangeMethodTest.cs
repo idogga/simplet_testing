@@ -16,11 +16,10 @@ namespace IntegrationTest.Controllers.NotificationsController
         public async Task GetSaved_NoParametrs_Seccess()
         {
             //Arrange
-            var requestGet = new HttpRequestMessage(HttpMethod.Get, "/api/Simple/saved");
 
             //Act
             var responsePut = await _httpClient.PutAsync("/api/Simple/saved", null);
-            var responseGet = await _httpClient.SendAsync(requestGet);
+            var responseGet = await _httpClient.GetAsync("/api/Simple/saved");
             string result = responseGet.Content.ReadAsStringAsync().Result;
 
             //Assert
