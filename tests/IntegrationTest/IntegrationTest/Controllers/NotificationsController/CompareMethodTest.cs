@@ -2,8 +2,8 @@
 
 namespace IntegrationTest.Controllers.NotificationsController
 {
-    [TestFixture, Order(2)]
-    public class CompareMethodTest
+    [TestFixture]
+    public class CompareMethodTest : TestHelper
     {
         [Test]
         public async Task Compare_WithMathingValues_Seccess()
@@ -13,7 +13,7 @@ namespace IntegrationTest.Controllers.NotificationsController
             int b = 5;
             
             //Act
-            var response = await Helper._httpClient.GetAsync($"/api/Simple/{a}/is/{b}");
+            var response = await httpClient.GetAsync($"/api/Simple/{a}/is/{b}");
             var result = response.Content.ReadAsStringAsync();
 
             //Assert
@@ -29,7 +29,7 @@ namespace IntegrationTest.Controllers.NotificationsController
             int b = 10;
 
             //Act
-            var response = await Helper._httpClient.GetAsync($"/api/Simple/{a}/is/{b}");
+            var response = await httpClient.GetAsync($"/api/Simple/{a}/is/{b}");
             var result = response.Content.ReadAsStringAsync();
 
             //Assert

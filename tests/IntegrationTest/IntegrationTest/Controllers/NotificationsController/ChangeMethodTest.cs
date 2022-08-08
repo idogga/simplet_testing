@@ -2,17 +2,17 @@
 
 namespace IntegrationTest.Controllers.NotificationsController
 {
-    [TestFixture, Order(4)]
-    public class ChangeMethodTest
+    [TestFixture]
+    public class ChangeMethodTest : TestHelper
     {
         [Test]
         public async Task GetSaved_NoParametrs_Seccess()
         {
             //Arrange
-            var responsePut = await Helper._httpClient.PutAsync("/api/Simple/saved", null);
+            var responsePut = await httpClient.PutAsync("/api/Simple/saved", null);
 
             //Act
-            var responseGet = await Helper._httpClient.GetAsync("/api/Simple/saved");
+            var responseGet = await httpClient.GetAsync("/api/Simple/saved");
             var result = responseGet.Content.ReadAsStringAsync();
 
             //Assert
