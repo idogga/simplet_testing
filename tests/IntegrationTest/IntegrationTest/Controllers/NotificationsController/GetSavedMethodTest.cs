@@ -5,12 +5,7 @@ namespace IntegrationTest.Controllers.NotificationsController
     [TestFixture]
     public class GetSavedMethodTest
     {
-        private readonly HttpClient _httpClient;
-
-        public GetSavedMethodTest()
-        {
-            _httpClient = Helper.GetHttpClient();
-        }
+        private readonly HttpClient _httpClient = Helper.GetHttpClient();
 
         [Test]
         public async Task GetSaved_NoParametrs_Seccess()
@@ -19,11 +14,11 @@ namespace IntegrationTest.Controllers.NotificationsController
 
             //Act
             var response = await _httpClient.GetAsync("/api/Simple/saved");
-            string result = response.Content.ReadAsStringAsync().Result;
+            var result = response.Content.ReadAsStringAsync();
 
             //Assert
             response.EnsureSuccessStatusCode();
-            Assert.That(result, Is.EqualTo("2"));
+            Assert.That(result.Result, Is.EqualTo("2"));
         }
     }
 }

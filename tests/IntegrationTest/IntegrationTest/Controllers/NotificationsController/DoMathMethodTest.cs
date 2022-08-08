@@ -6,12 +6,7 @@ namespace IntegrationTest.Controllers.NotificationsController
     [TestFixture]
     public class DoMathMethodTest
     {
-        private readonly HttpClient _httpClient;
-
-        public DoMathMethodTest()
-        {
-            _httpClient = Helper.GetHttpClient();
-        }
+        private readonly HttpClient _httpClient = Helper.GetHttpClient();
 
         [Test]
         public async Task DoMath_WithCorrectValues_Seccess()
@@ -22,11 +17,11 @@ namespace IntegrationTest.Controllers.NotificationsController
 
             //Act
             var response = await _httpClient.GetAsync($"/api/Simple/{a}/plus/{b}");
-            string result = response.Content.ReadAsStringAsync().Result;
+            var result = response.Content.ReadAsStringAsync();
 
             //Assert
             response.EnsureSuccessStatusCode();
-            Assert.That(result, Is.EqualTo($"{a + b}"));
+            Assert.That(result.Result, Is.EqualTo($"{a + b}"));
         }
 
         [Test]
@@ -38,11 +33,11 @@ namespace IntegrationTest.Controllers.NotificationsController
 
             //Act
             var response = await _httpClient.GetAsync($"/api/Simple/{a}/plus/{b}");
-            string result = response.Content.ReadAsStringAsync().Result;
+            var result = response.Content.ReadAsStringAsync();
 
             //Assert
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
-            Assert.IsTrue(result.Contains($"oups,  a value is {a}"));
+            Assert.IsTrue(result.Result.Contains($"oups,  a value is {a}"));
         }
 
         [Test]
@@ -54,11 +49,11 @@ namespace IntegrationTest.Controllers.NotificationsController
 
             //Act
             var response = await _httpClient.GetAsync($"/api/Simple/{a}/plus/{b}");
-            string result = response.Content.ReadAsStringAsync().Result;
+            var result = response.Content.ReadAsStringAsync();
 
             //Assert
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
-            Assert.IsTrue(result.Contains($"oups, b value is too be {b}"));
+            Assert.IsTrue(result.Result.Contains($"oups, b value is too be {b}"));
         }
     }
 }

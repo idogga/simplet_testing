@@ -5,12 +5,7 @@ namespace IntegrationTest.Controllers.NotificationsController
     [TestFixture]
     public class ChangeMethodTest
     {
-        private readonly HttpClient _httpClient;
-
-        public ChangeMethodTest()
-        {
-            _httpClient = Helper.GetHttpClient();
-        }
+        private readonly HttpClient _httpClient = Helper.GetHttpClient();
 
         [Test]
         public async Task GetSaved_NoParametrs_Seccess()
@@ -20,11 +15,11 @@ namespace IntegrationTest.Controllers.NotificationsController
             //Act
             var responsePut = await _httpClient.PutAsync("/api/Simple/saved", null);
             var responseGet = await _httpClient.GetAsync("/api/Simple/saved");
-            string result = responseGet.Content.ReadAsStringAsync().Result;
+            var result = responseGet.Content.ReadAsStringAsync();
 
             //Assert
             responsePut.EnsureSuccessStatusCode();
-            Assert.That(result, Is.EqualTo("4"));
+            Assert.That(result.Result, Is.EqualTo("4"));
         }
     }
 }

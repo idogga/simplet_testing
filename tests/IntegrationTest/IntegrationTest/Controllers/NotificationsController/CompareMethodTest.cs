@@ -5,12 +5,7 @@ namespace IntegrationTest.Controllers.NotificationsController
     [TestFixture]
     public class CompareMethodTest
     {
-        private readonly HttpClient _httpClient;
-
-        public CompareMethodTest()
-        {
-            _httpClient = Helper.GetHttpClient();
-        }
+        private readonly HttpClient _httpClient = Helper.GetHttpClient();
 
         [Test]
         public async Task Compare_WithMathingValues_Seccess()
@@ -18,14 +13,14 @@ namespace IntegrationTest.Controllers.NotificationsController
             //Arrange
             int a = 5;
             int b = 5;
-
+            
             //Act
             var response = await _httpClient.GetAsync($"/api/Simple/{a}/is/{b}");
-            string result = response.Content.ReadAsStringAsync().Result;
+            var result = response.Content.ReadAsStringAsync();
 
             //Assert
             response.EnsureSuccessStatusCode();
-            Assert.That(result, Is.EqualTo("true"));
+            Assert.That(result.Result, Is.EqualTo("true"));
         }
 
         [Test]
@@ -37,11 +32,11 @@ namespace IntegrationTest.Controllers.NotificationsController
 
             //Act
             var response = await _httpClient.GetAsync($"/api/Simple/{a}/is/{b}");
-            string result = response.Content.ReadAsStringAsync().Result;
+            var result = response.Content.ReadAsStringAsync();
 
             //Assert
             response.EnsureSuccessStatusCode();
-            Assert.That(result, Is.EqualTo("false"));
+            Assert.That(result.Result, Is.EqualTo("false"));
         }
     }
 }
