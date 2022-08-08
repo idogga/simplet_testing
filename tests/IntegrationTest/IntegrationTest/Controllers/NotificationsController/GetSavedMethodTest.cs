@@ -2,18 +2,16 @@
 
 namespace IntegrationTest.Controllers.NotificationsController
 {
-    [TestFixture]
+    [TestFixture, Order(3)]
     public class GetSavedMethodTest
     {
-        private readonly HttpClient _httpClient = Helper.GetHttpClient();
-
         [Test]
         public async Task GetSaved_NoParametrs_Seccess()
         {
             //Arrange
 
             //Act
-            var response = await _httpClient.GetAsync("/api/Simple/saved");
+            var response = await Helper._httpClient.GetAsync("/api/Simple/saved");
             var result = response.Content.ReadAsStringAsync();
 
             //Assert

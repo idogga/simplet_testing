@@ -3,11 +3,9 @@ using NUnit.Framework;
 
 namespace IntegrationTest.Controllers.NotificationsController
 {
-    [TestFixture]
+    [TestFixture, Order(1)]
     public class DoMathMethodTest
     {
-        private readonly HttpClient _httpClient = Helper.GetHttpClient();
-
         [Test]
         public async Task DoMath_WithCorrectValues_Seccess()
         {
@@ -16,7 +14,7 @@ namespace IntegrationTest.Controllers.NotificationsController
             int b = 70;
 
             //Act
-            var response = await _httpClient.GetAsync($"/api/Simple/{a}/plus/{b}");
+            var response = await Helper._httpClient.GetAsync($"/api/Simple/{a}/plus/{b}");
             var result = response.Content.ReadAsStringAsync();
 
             //Assert
@@ -32,7 +30,7 @@ namespace IntegrationTest.Controllers.NotificationsController
             int b = 70;
 
             //Act
-            var response = await _httpClient.GetAsync($"/api/Simple/{a}/plus/{b}");
+            var response = await Helper._httpClient.GetAsync($"/api/Simple/{a}/plus/{b}");
             var result = response.Content.ReadAsStringAsync();
 
             //Assert
@@ -48,7 +46,7 @@ namespace IntegrationTest.Controllers.NotificationsController
             int b = 50;
 
             //Act
-            var response = await _httpClient.GetAsync($"/api/Simple/{a}/plus/{b}");
+            var response = await Helper._httpClient.GetAsync($"/api/Simple/{a}/plus/{b}");
             var result = response.Content.ReadAsStringAsync();
 
             //Assert

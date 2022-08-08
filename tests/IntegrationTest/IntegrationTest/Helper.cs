@@ -5,7 +5,9 @@ namespace IntegrationTest
 {
     public class Helper
     {
-        public static HttpClient GetHttpClient()
+        public static HttpClient _httpClient = new Helper().GetHttpClient();
+
+        public HttpClient GetHttpClient()
         {
             return new WebApplicationFactory<Startup>().CreateClient();
         }
