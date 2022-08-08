@@ -14,11 +14,11 @@ namespace IntegrationTest.Controllers.NotificationsController
             
             //Act
             var response = await httpClient.GetAsync($"/api/Simple/{a}/is/{b}");
-            var result = response.Content.ReadAsStringAsync();
+            var result = await response.Content.ReadAsStringAsync();
 
             //Assert
             response.EnsureSuccessStatusCode();
-            Assert.That(result.Result, Is.EqualTo("true"));
+            Assert.That(result, Is.EqualTo("true"));
         }
 
         [Test]
@@ -30,11 +30,11 @@ namespace IntegrationTest.Controllers.NotificationsController
 
             //Act
             var response = await httpClient.GetAsync($"/api/Simple/{a}/is/{b}");
-            var result = response.Content.ReadAsStringAsync();
+            var result = await response.Content.ReadAsStringAsync();
 
             //Assert
             response.EnsureSuccessStatusCode();
-            Assert.That(result.Result, Is.EqualTo("false"));
+            Assert.That(result, Is.EqualTo("false"));
         }
     }
 }
