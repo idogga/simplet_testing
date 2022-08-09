@@ -8,13 +8,13 @@ namespace IntegrationTest.Controllers.NotificationsController
         [Test]
         public async Task GetSaved_NoParametrs_Seccess()
         {
-            //Arrange
+            // Arrange
 
-            //Act
+            // Act
             var response = await httpClient.GetAsync("/api/Simple/saved");
             var result = await response.Content.ReadAsStringAsync();
 
-            //Assert
+            // Assert
             response.EnsureSuccessStatusCode();
             Assert.That(result, Is.EqualTo("2"));
         }

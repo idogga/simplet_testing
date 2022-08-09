@@ -8,15 +8,15 @@ namespace IntegrationTest.Controllers.NotificationsController
         [Test]
         public async Task Compare_WithMathingValues_Seccess()
         {
-            //Arrange
-            int a = 5;
-            int b = 5;
+            // Arrange
+            string a = "5";
+            string b = "5";
             
-            //Act
+            // Act
             var response = await httpClient.GetAsync($"/api/Simple/{a}/is/{b}");
             var result = await response.Content.ReadAsStringAsync();
 
-            //Assert
+            // Assert
             response.EnsureSuccessStatusCode();
             Assert.That(result, Is.EqualTo("true"));
         }
@@ -24,15 +24,15 @@ namespace IntegrationTest.Controllers.NotificationsController
         [Test]
         public async Task Compare_WithMismatchedValues_Seccess()
         {
-            //Arrange
-            int a = 0;
-            int b = 10;
+            // Arrange
+            string a = "0";
+            string b = "10";
 
-            //Act
+            // Act
             var response = await httpClient.GetAsync($"/api/Simple/{a}/is/{b}");
             var result = await response.Content.ReadAsStringAsync();
 
-            //Assert
+            // Assert
             response.EnsureSuccessStatusCode();
             Assert.That(result, Is.EqualTo("false"));
         }
