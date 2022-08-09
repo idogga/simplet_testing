@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.DependencyInjection;
 using NST.Simple.Api;
 
 namespace IntegrationTest
@@ -10,14 +9,11 @@ namespace IntegrationTest
         {
             httpClient = new WebApplicationFactory<Startup>().CreateClient();
 
-            IServiceScope serviceScope = new WebApplicationFactory<Startup>().Server
-                .Services.CreateScope();
-
-            superService = serviceScope.ServiceProvider.GetRequiredService<SuperService>();
+            serviceProvider = new WebApplicationFactory<Startup>().Server.Services;
         }
 
         private protected readonly HttpClient httpClient;
 
-        private protected readonly SuperService superService;
+        private protected readonly IServiceProvider serviceProvider;
     }
 }

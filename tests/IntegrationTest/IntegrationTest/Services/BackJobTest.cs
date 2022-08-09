@@ -1,4 +1,5 @@
-﻿using NST.Simple.Api;
+﻿using Microsoft.Extensions.DependencyInjection;
+using NST.Simple.Api;
 using NUnit.Framework;
 
 namespace IntegrationTest.Services
@@ -7,19 +8,17 @@ namespace IntegrationTest.Services
     public class BackJobTest : TestHelper
     {
         [Test]
-        public void BackJob_NoParametrs_Seccess()
+        public async Task BackJob_NoParametrs_Seccess()
         {
             // Arrange
-            var backJob = new BackJob(superService);
-            var completed = backJob.StartAsync(CancellationToken.None).IsCompleted;
-
+            var service = serviceProvider.GetRequiredService<SuperService>();
+            var backJob = new BackJob(service);
 
             // Act
-            int response = superService.GetSavedValue();
-
+            await backJob.StartAsync(CancellationToken.None);
 
             // Assert
-            Assert.True(completed);
+            int response = service.GetSavedValue();
             Assert.That(response.ToString(), Is.EqualTo("4"));
         }
     }

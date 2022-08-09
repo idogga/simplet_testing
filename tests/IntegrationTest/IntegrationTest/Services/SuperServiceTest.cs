@@ -1,30 +1,34 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.Extensions.DependencyInjection;
+using NST.Simple.Api;
+using NUnit.Framework;
 
 namespace IntegrationTest.Services
 {
     [TestFixture]
     public class SuperServiceTest : TestHelper
     {
-        [Test, Order(1)]
+        [Test]
         public void GetSaved_NoParametrs_Seccess()
         {
             // Arrange
-
+            var service = serviceProvider.GetRequiredService<SuperService>();
+            
             // Act
-            int response = superService.GetSavedValue();
+            int response = service.GetSavedValue();
 
             // Assert
-            Assert.That(response.ToString(), Is.EqualTo("2"));
+            Assert.That(response.ToString(), Is.EqualTo("4"));
         }
 
-        [Test, Order(2)]
+        [Test]
         public void Change_NoParametrs_Seccess()
         {
             // Arrange
-            superService.DoubleSavedValue();
+            var service = serviceProvider.GetRequiredService<SuperService>();
+            service.DoubleSavedValue();
 
             // Act
-            int response = superService.GetSavedValue();
+            int response = service.GetSavedValue();
 
             // Assert
             Assert.That(response.ToString(), Is.EqualTo("4"));
