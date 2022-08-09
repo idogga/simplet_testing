@@ -17,10 +17,10 @@ namespace IntegrationTest.Controllers.NotificationsController
 
             // Act
             var response = await httpClient.GetAsync($"/api/Simple/{a}/plus/{b}");
-            var result = await response.Content.ReadAsStringAsync();
 
             // Assert
             response.EnsureSuccessStatusCode();
+            var result = await response.Content.ReadAsStringAsync();
             Assert.That(result, Is.EqualTo($"{int.Parse(a) + int.Parse(b)}"));
         }
 
@@ -35,9 +35,9 @@ namespace IntegrationTest.Controllers.NotificationsController
 
             // Act
             var response = await httpClient.GetAsync($"/api/Simple/{a}/plus/{b}");
-            var result = await response.Content.ReadAsStringAsync();
 
             // Assert
+            var result = await response.Content.ReadAsStringAsync();
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
             Assert.IsTrue(result.Contains($"oups,  a value is {a}"));
         }
@@ -53,9 +53,9 @@ namespace IntegrationTest.Controllers.NotificationsController
 
             // Act
             var response = await httpClient.GetAsync($"/api/Simple/{a}/plus/{b}");
-            var result = await response.Content.ReadAsStringAsync();
 
             // Assert
+            var result = await response.Content.ReadAsStringAsync();
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
             Assert.IsTrue(result.Contains($"oups, b value is too be {b}"));
         }

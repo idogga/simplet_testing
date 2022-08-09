@@ -12,11 +12,11 @@ namespace IntegrationTest.Controllers.NotificationsController
             await httpClient.PutAsync("/api/Simple/saved", null);
 
             // Act
-            var responseGet = await httpClient.GetAsync("/api/Simple/saved");
+            var response = await httpClient.GetAsync("/api/Simple/saved");
 
             // Assert
-            responseGet.EnsureSuccessStatusCode();
-            var result = await responseGet.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            var result = await response.Content.ReadAsStringAsync();
             Assert.That(result, Is.EqualTo("4"));
         }
     }
