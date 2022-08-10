@@ -18,8 +18,8 @@ namespace IntegrationTest.Services
             await backJob.StartAsync(CancellationToken.None);
 
             // Assert
-            int response = service.GetSavedValue();
-            Assert.That(response.ToString(), Is.EqualTo("4"));
+            var response = service.GetSavedValue();
+            Assert.That(response, Is.EqualTo(4));
         }
     }
 }

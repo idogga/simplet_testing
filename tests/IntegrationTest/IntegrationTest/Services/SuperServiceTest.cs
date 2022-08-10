@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 using NST.Simple.Api;
 using NUnit.Framework;
 
@@ -12,12 +13,16 @@ namespace IntegrationTest.Services
         {
             // Arrange
             var service = serviceProvider.GetRequiredService<SuperService>();
+
+            // Изменение значения поля value на 2 с помощью рефлексии
+            service.GetType().GetField("value", BindingFlags.NonPublic 
+                | BindingFlags.Instance).SetValue(service, 2);
             
             // Act
-            int response = service.GetSavedValue();
+            var response = service.GetSavedValue();
 
             // Assert
-            Assert.That(response.ToString(), Is.EqualTo("4"));
+            Assert.That(response, Is.EqualTo(2));
         }
 
         [Test]
@@ -25,13 +30,13 @@ namespace IntegrationTest.Services
         {
             // Arrange
             var service = serviceProvider.GetRequiredService<SuperService>();
-            service.DoubleSavedValue();
 
             // Act
-            int response = service.GetSavedValue();
+            service.DoubleSavedValue();
 
             // Assert
-            Assert.That(response.ToString(), Is.EqualTo("4"));
+            var response = service.GetSavedValue();
+            Assert.That(response, Is.EqualTo(4));
         }
     }
 }
