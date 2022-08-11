@@ -2,7 +2,7 @@
 using NST.Simple.Api;
 using NUnit.Framework;
 
-namespace IntegrationTest.Services
+namespace IntegrationTest.Services.BackJobServices
 {
     [TestFixture]
     public class BackJobTest : TestHelper

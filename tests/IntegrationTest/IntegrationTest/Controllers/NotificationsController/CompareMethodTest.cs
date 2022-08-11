@@ -11,7 +11,7 @@ namespace IntegrationTest.Controllers.NotificationsController
             // Arrange
             string a = "5";
             string b = "5";
-            
+
             // Act
             var response = await httpClient.GetAsync($"/api/Simple/{a}/is/{b}");
 
